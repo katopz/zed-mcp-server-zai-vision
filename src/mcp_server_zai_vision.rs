@@ -6,7 +6,7 @@ use zed_extension_api::{
 };
 
 const PACKAGE_NAME: &str = "@z_ai/mcp-server";
-const PACKAGE_VERSION: &str = "latest";
+const PACKAGE_VERSION: &str = "0.1.4";
 
 #[derive(Debug, Deserialize, JsonSchema)]
 struct ZaiVisionMcpExtensionSettings {
@@ -27,8 +27,7 @@ impl zed::Extension for ZaiVisionMcpExtension {
         _context_server_id: &ContextServerId,
         project: &Project,
     ) -> Result<Command> {
-        let version = zed::npm_package_installed_version(PACKAGE_NAME)?;
-        if version.as_deref() != Some(PACKAGE_VERSION) {
+        if zed::npm_package_installed_version(PACKAGE_NAME)?.is_none() {
             zed::npm_install_package(PACKAGE_NAME, PACKAGE_VERSION)?;
         }
 
