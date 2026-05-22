@@ -40,7 +40,7 @@ impl zed::Extension for ZaiVisionMcpExtension {
         };
 
         let server_path = format!(
-            "{}/node_modules/@z_ai/mcp-server/dist/index.js",
+            "{}/node_modules/@z_ai/mcp-server/build/index.js",
             std::env::current_dir()
                 .map_err(|e| format!("{e}"))?
                 .to_string_lossy()
